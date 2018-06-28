@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> SVA renderer </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+</body>
+<script>
+function Polygon(points = [])
+{
+    this.points = points;
+    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+}
+
+Polygon.prototype.buildPointsAttribute = function(points)
+{
+    var values = [];
+
+    for (var point of points)
+        values.push(point.join(','));
+
+    return values.join(' ');
+}
+
+Polygon.prototype.render = function()
+{
+    this.node.setAttribute('points', this.buildPointsAttribute(this.points));
+}
+
+function Polyline(points = [])
+{
+    this.points = points;
+    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+}
+
+Polyline.prototype.buildPointsAttribute = function(points)
+{
+    var values = [];
+
+    for (var point of points)
+        values.push(point.join(','));
+
+    return values.join(' ');
+}
+
+Polyline.prototype.render = function()
+{
+    this.node.setAttribute('points', this.buildPointsAttribute(this.points));
+}
+
+var p = new Polygon([[100, 100], [150, 100], [150, 300], [100, 300]]);
+p.render();
+
+var la = new Polyline([[125, 125], [125, 275]]);
+la.node.style.stroke = "red";
+la.render();
+
+var lb = new Polyline([[175, 125], [300, 225]]);
+lb.node.style.stroke = "green";
+lb.render();
+
+var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+svg.setAttribute("width", 700);
+svg.setAttribute("height", 600);
+svg.style.border = "2px solid blue";
+svg.appendChild(p.node);
+svg.appendChild(la.node);
+svg.appendChild(lb.node);
+document.body.appendChild(svg);
+
+function obtainLength(a, b)
+{
+    // [0] = x // [1] = y
+    return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
+}
+
+Math.radians = function(degrees) {
+	return degrees * Math.PI / 180;
+}
+
+Math.degrees = function(radians) {
+	return radians * 180 / Math.PI;
+}
+
+function obtainTriANGLE(a, b, c)
+{
+    l_ab = obtainLength(a, b);
+    l_bc = obtainLength(b, c);
+    l_ac = obtainLength(a, c);
+    return Math.acos((Math.pow(l_ab, 2) + Math.pow(l_bc, 2) - Math.pow(l_ac, 2)) / (2 * l_ab * l_bc));
+}
+
+function rotatepoint(origin, point, angle)
+{
+    var newpoint = [point[0], point[1]];
+    var s = Math.sin(angle);
+    var c = Math.cos(angle);
+
+    // [0] = x // [1] = y
+    newpoint[0] -= origin[0];
+    newpoint[1] -= origin[1];
+
+    var newx = newpoint[0] * c - newpoint[1] * s;
+    var newy = newpoint[0] * s + newpoint[1] * c;
+
+    newpoint[0] += newx + origin[0];
+    newpoint[1] += newy + origin[1];
+
+    return newpoint;
+}
+
+function MOVE()
+{
+    //console.log(Math.degrees(obtainTriANGLE([0, 100], [100, 0], [200, 100])));
+
+    //for (var i = 0; i < lb.points.length; i++)
+    for (var i = 1; i == 1; i++)
+    {
+        var angle = obtainTriANGLE(la.points[i], la.points[i == 0 ? 1 : 0], lb.points[i]);
+        console.log(Math.degrees(angle));
+
+        for (var j = 0; j < p.points.length; j++)
+        {
+            console.log("ORIGIN", la.points[i == 0 ? 1 : 0]);
+            console.log(p.points[j]);
+            p.points[j] = rotatepoint(la.points[i == 0 ? 1 : 0], p.points[j], angle);
+            console.log(p.points[j]);
+            console.log("!");
+        }
+
+        la.points[i] = lb.points[i];
+    }
+}
+</script>
+</html>

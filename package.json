@@ -1,0 +1,10 @@
+{
+    "main": "app/index.html",
+    "name": "Animate",
+    "window": {
+        "toolbar": false,
+        "frame": false,
+        "min_width": 800,
+        "min_height": 600
+    }
+}

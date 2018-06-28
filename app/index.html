@@ -1,7 +1,7 @@
 <html>
 <head>
     <script src="js/cssLoader.js"></script>
-    <script>cssLoader.setCurrentTheme('dark-theme');</script>
+    <script>cssLoader.setCurrentTheme('default-theme');</script>
 </head>
 <body>
     <div class="titlebar">
@@ -11,6 +11,14 @@
             --><button id="close-btn" onclick="win.close();"></button>
         </div>
     </div>
+    
+    <div id="menubar" onclick="toggleDialog(document.querySelector('#testing'));">TESTING</div>
+    <div id="TESTING">
+        Hello, World!
+    </div>
 </body>
 <script src="js/main.js"></script>
+<script src="js/dialog.js"></script>
+<script src="js/contextmenu.js"></script>
+<script src="js/menubar.js"></script>
 </html>

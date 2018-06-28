@@ -16,3 +16,18 @@ body.maximized {
 .float-right {
     float: right;
 }
+
+#TESTING {
+    position: fixed;
+    top: -100px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: green;
+    transition: all 0.3s;
+}
+
+#TESTING.shown {
+    top: 100px;
+    right: 100px;
+}

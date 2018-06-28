@@ -1,6 +1,6 @@
 {
     "main": "app/index.html",
-    "name": "Animate",
+    "name": "Animate SV",
     "window": {
         "toolbar": false,
         "frame": false,

@@ -1,0 +1,18 @@
+.btn {
+	background: linear-gradient(to bottom, #474747 0%, #3F3F3F 100%);
+	color: #eee;
+	border-top: 1px solid #666;
+	border-radius: 2px;
+	box-shadow: 0 0 0px 1px #222;
+}
+
+.btn:hover {
+	background: linear-gradient(to bottom, #3B3B3B 0%, #3E3E3E 100%);
+}
+
+.btn:active {
+	background: linear-gradient(to bottom, #2B2B2B 0%, #3E3E3E 100%);
+	border: none;
+	border-bottom: 1px solid #666;
+	box-shadow: 0 0 0px 1px #222, inset 0 0 3px 0px #222;
+}

@@ -1,0 +1,39 @@
+.titlebar {
+    background: #444;
+}
+
+.titlebar:hover {
+    background: #404040;
+}
+
+.titlebar button {
+    background: #333;
+    color: #eee;
+    border-top: 1px solid #666;
+}
+
+.titlebar button:hover {
+    background: #2F2F2F;
+}
+
+.titlebar button:active {
+    background: #222;
+    border: none;
+    border-bottom: 1px solid #666;
+}
+
+#minimize-btn {
+    background-image: url("../../img/default-theme/minimize-window.png");
+}
+
+#maximize-btn {
+    background-image: url("../../img/default-theme/maximize-window.png");
+}
+
+body.maximized #maximize-btn {
+    background-image: url("../../img/default-theme/restore-window.png");
+}
+
+#close-btn {
+    background-image: url("../../img/default-theme/close-window.png");
+}

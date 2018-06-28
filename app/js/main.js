@@ -8,11 +8,7 @@ win.toggleMaximized = function()
     if (win.isMaximized)
         win.unmaximize();
     else
-    {
         win.maximize();
-        win.unmaximize();
-        win.maximize();     // fixes glitch on Windows.
-    }
 }
 
 win.on('maximize', function() {
